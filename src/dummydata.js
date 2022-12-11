@@ -11,7 +11,7 @@ const dummyData = {
             id: 2,
             title: 'Walk the dog',
             description: 'Walk the dog for at least 30 minutes. Bring baggies',
-            completed: false
+            completed: true
         },
         {
             id: 3,
