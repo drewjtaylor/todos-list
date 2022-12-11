@@ -5,7 +5,22 @@ import './App.css';
 
 function App() {
     // To work on displaying list properly, set up a "dummy" list state, including the name of the user and some list items
-    const [listState, SetListState] = useState(dummyData)
+    let testState = JSON.parse(localStorage.getItem('todos'));
+    const [listState, SetListState] = useState(() => {
+        const savedState = localStorage.getItem('todoState');
+
+        if (savedState) {
+            return JSON.parse(savedState)
+        } else {
+            return dummyData
+        }
+    })
+
+
+    useEffect(() => {
+        localStorage.setItem('todoState', JSON.stringify(listState));
+    }, [listState]);
+
 
     const toggleComplete = (id) => {
         const updatedState = {
