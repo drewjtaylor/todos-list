@@ -10,9 +10,13 @@ Since this is mainly for practice with React, all information is kept on the cli
 
 To have some degree of permanence, the list will be kept client-side.
 
+## App structure
 
+A simple to-do app could probably all be done in the App.js file. However, to get some exercise passing props around and dealing with some structure, each item is its own component (ListItem).
 
+## DayJS
 
+In anticipation of using reminders, DayJS has been downloaded to deal with dates and times.
 
 ## Sources
 
