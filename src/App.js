@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState, useEffect} from 'react';
 
 function App() {
+    // To work on displaying list properly, set up a "dummy" list state, including the name of the user and some list items
+    const [listState, SetListState] = {
+        firstName: 'Andrew',
+        listItems: [
+            {
+                title: 'Finish to-do list',
+                description: 'Work on my to-do list until it\'s complete',
+                completed: false
+            },
+            {
+                title: 'Walk the dog',
+                description: 'Walk the dog for at least 30 minutes. Bring baggies',
+                completed: false
+            },
+            {
+                title: 'Fix fridge',
+                description: 'The ice-maker is only dispensing crushed ice, but should be able to switch between crushed and cubed.',
+                completed: false
+            },
+            {
+                title: 'Sell junk',
+                description: 'Clean out closet. Sell stuff on eBay.',
+                completed: false
+            }
+        ]
+    }
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <h1>Title of list</h1>
+    </>
   );
 }
 
