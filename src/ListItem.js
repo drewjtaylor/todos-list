@@ -1,5 +1,5 @@
-const ListItem = (props) => {
-    const {title, description, completed, id} = props.item;
+const ListItem = ({item}) => {
+    const {title, description, completed} = item;
   
   
     if (!completed) {
