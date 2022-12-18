@@ -1,18 +1,13 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import dummyData from './dummydata';
 import ListItem from './ListItem';
 import './App.css';
 
 function App() {
     // To work on displaying list properly, set up a "dummy" list state, including the name of the user and some list items
-
     const [listState, SetListState] = useState(() => {
-        const savedState = localStorage.getItem('todoState');
-        console.log(savedState);
-
         return JSON.parse(localStorage.getItem('todoState')) || dummyData
         })
-
 
     // Every time the "listState" is updated, update local storage keyto match
     useEffect(() => {
@@ -20,6 +15,7 @@ function App() {
     }, [listState]);
 
 
+    // Toggle existing item between "completed" or "uncomplete"
     const toggleComplete = (id) => {
         const updatedState = {
             ...listState,
@@ -35,6 +31,44 @@ function App() {
         SetListState(updatedState);
     }
 
+    // References set up for input values (better than reloading state every time a character gets typed in the form)
+    const newTitleRef = useRef();
+    const newDescriptionRef = useRef();
+
+    // Function to add item to state
+    const addItem = (title, description) => {
+        const updatedState = {
+            ...listState,
+            listItems: [...listState.listItems, {
+                id: new Date().toISOString,
+                title,
+                description,
+                completed: false
+            }]
+        }
+
+        SetListState(updatedState)
+    }
+
+    // Function to remove item from state entirely
+    const removeItem = (id) => {
+        const updatedList = listState.listItems.filter((item) => (item.id !== id));
+
+        SetListState({
+            ...listState,
+            listItems: updatedList
+        })
+    }
+
+
+    // 
+
+    // Handles New Item submission.
+    const handleNewItemSubmit = (e) => {
+        e.preventDefault();
+        addItem(newTitleRef.current.value, newDescriptionRef.current.value)
+    }
+
   return (
     <>
         <h1 className='list-header'>{`${listState.firstName}'s List`}</h1>
@@ -46,9 +80,21 @@ function App() {
             </div>
         }))}
 
-        <button onClick={() => {
+        <form onSubmit={handleNewItemSubmit}>
+        <label>
+            New item title:
+            <input type="text" name="item" ref={newTitleRef}/>
+        </label>
+        <label>
+            New item description:
+            <input type="text" name="description" ref={newDescriptionRef}/>
+        </label>
+        <input type="submit" value="Submit" />
+        </form>
+
+        {/* <button onClick={() => {
             console.log(JSON.stringify(localStorage.getItem(('todoState')), null, 2))
-        }}>Press button to check "localstorage.todoState"</button>
+        }}>Press button to check "localstorage.todoState"</button> */}
     </>
   );
 }
