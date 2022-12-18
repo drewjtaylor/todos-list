@@ -1,12 +1,11 @@
 import {useState, useEffect, useRef} from 'react';
-import dummyData from './dummydata';
 import ListItem from './ListItem';
 import './App.css';
 
 function App() {
     // To work on displaying list properly, set up a "dummy" list state, including the name of the user and some list items
     const [listState, SetListState] = useState(() => {
-        return JSON.parse(localStorage.getItem('todoState')) || dummyData
+        return JSON.parse(localStorage.getItem('todoState')) || {}
         })
 
     // Every time the "listState" is updated, update local storage keyto match
@@ -40,7 +39,7 @@ function App() {
         const updatedState = {
             ...listState,
             listItems: [...listState.listItems, {
-                id: new Date().toISOString,
+                id: new Date().toISOString(),
                 title,
                 description,
                 completed: false
@@ -53,7 +52,7 @@ function App() {
     // Function to remove item from state entirely
     const removeItem = (id) => {
         const updatedList = listState.listItems.filter((item) => (item.id !== id));
-
+        console.log(JSON.stringify(updatedList, null, 2));
         SetListState({
             ...listState,
             listItems: updatedList
@@ -75,7 +74,9 @@ function App() {
         {listState.listItems.map((item => {
             return <div key={item.id}>
                 <button onClick={() => toggleComplete(item.id)}>Toggle complete</button>
-                    <ListItem item={item} />
+                    <ListItem item={item} removeItem={removeItem}/>
+                    <p>Remove from list</p>
+                    <button className="remove-button" onClick={() => removeItem(item.id)}><div className="margin-auto">X</div></button>
                 <hr />
             </div>
         }))}
@@ -92,9 +93,9 @@ function App() {
         <input type="submit" value="Submit" />
         </form>
 
-        {/* <button onClick={() => {
+        <button onClick={() => {
             console.log(JSON.stringify(localStorage.getItem(('todoState')), null, 2))
-        }}>Press button to check "localstorage.todoState"</button> */}
+        }}>Press button to check "localstorage.todoState"</button>
     </>
   );
 }
