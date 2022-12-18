@@ -52,7 +52,6 @@ function App() {
     // Function to remove item from state entirely
     const removeItem = (id) => {
         const updatedList = listState.listItems.filter((item) => (item.id !== id));
-        console.log(JSON.stringify(updatedList, null, 2));
         SetListState({
             ...listState,
             listItems: updatedList
@@ -94,7 +93,6 @@ function App() {
         </form>
 
         <button onClick={() => {
-            console.log(JSON.stringify(localStorage.getItem(('todoState')), null, 2))
         }}>Press button to check "localstorage.todoState"</button>
     </>
   );
