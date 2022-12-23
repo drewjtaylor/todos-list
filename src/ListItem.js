@@ -4,17 +4,17 @@ const ListItem = ({item}) => {
   
     if (!completed) {
         return (
-            <div className="item">
-                <div className="item-title">{title}</div>
-                <div className="item-description">{description}</div>
-            </div>
+            <>
+                <h3 className="item-title">{title}</h3>
+                <h5 className="item-description">{description}</h5>
+            </>
       )
     } else {
         return (
-            <div className="item">
-            <div className="item-title completed">{title}</div>
-            <div className="item-description completed">{description}</div>
-            </div>
+            <>
+            <h3 className="item-title completed">{title}</h3>
+            <h5 className="item-description completed">{description}</h5>
+            </>
       )
 
     }
