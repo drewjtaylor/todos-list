@@ -93,6 +93,7 @@ function App() {
         </form>
 
         <button onClick={() => {
+            console.log(localStorage.getItem('todoState'));
         }}>Press button to check "localstorage.todoState"</button>
     </>
   );
