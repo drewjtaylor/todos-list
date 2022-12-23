@@ -69,9 +69,27 @@ function App() {
 
   return (
     <>
-        <h1 className='list-header'>{`${listState.firstName}'s List`}</h1>
+        <h1 className='border button shadow rounded'>{`${listState.firstName}'s List`}</h1>
+        <br />
+        <form onSubmit={handleNewItemSubmit} className='border rounded button'>
+            <label>
+                New item title:
+                <input type="text" name="item" ref={newTitleRef}/>
+            </label>
+            <label>
+                New item description:
+                <input type="text" name="description" ref={newDescriptionRef}/>
+            </label>
+            <input type="submit" value="Submit" />
+        </form>
+        <br />
+        <button onClick={() => {
+            console.log(localStorage.getItem('todoState'));
+        }}>Press button to check "localstorage.todoState"</button>
+
+
         {listState.listItems.map((item => {
-            return <div key={item.id}>
+            return <div key={item.id} className='list-item'>
                 <button onClick={() => toggleComplete(item.id)}>Toggle complete</button>
                     <ListItem item={item} removeItem={removeItem}/>
                     <p>Remove from list</p>
@@ -80,21 +98,7 @@ function App() {
             </div>
         }))}
 
-        <form onSubmit={handleNewItemSubmit}>
-        <label>
-            New item title:
-            <input type="text" name="item" ref={newTitleRef}/>
-        </label>
-        <label>
-            New item description:
-            <input type="text" name="description" ref={newDescriptionRef}/>
-        </label>
-        <input type="submit" value="Submit" />
-        </form>
 
-        <button onClick={() => {
-            console.log(localStorage.getItem('todoState'));
-        }}>Press button to check "localstorage.todoState"</button>
     </>
   );
 }

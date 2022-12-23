@@ -1,23 +1,40 @@
-.list-header {
-
+.shadow {
+    box-shadow: 5px 7px 10px 1px
 }
 
+.button {
+    display: inline-flex;
+    padding: 5px
+}
+
+.rounded {
+    border-radius: 10px;
+}
+
+.border {
+    border: 2px solid
+}
 
 .item-title {
     text-decoration: inherit;
 }
 
+.list-item {
+    margin: 10px;
+    padding-left: 25px;
+}
+
+.list-item:hover {
+    background-color: rgb(250, 244, 236);
+}
 
 .item-description {
     text-decoration: inherit;
 }
 
-
 .completed {
     text-decoration: line-through;
 }
-
-
 
 .remove-button {
     margin-left: 25px;
@@ -26,7 +43,7 @@
     align-items: center;
     height: 40px;
     width: 40px;
-    border: 3px solid red;
+    border: 2px solid red;
     border-radius: 15%;
     background-color: black;
     color: white;
