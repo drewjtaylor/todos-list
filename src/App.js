@@ -88,8 +88,8 @@ function App() {
         }}>Press button to check "localstorage.todoState"</button>
 
 
-        {listState.listItems.map((item => {
-            return <div key={item.id} className='list-item'>
+        {listState.listItems.map(((item, index) => {
+            return <div key={item.id} className={index%2===0 ? 'list-item' : 'odd-list-item'}>
                 <button onClick={() => toggleComplete(item.id)}>Toggle complete</button>
                     <ListItem item={item} removeItem={removeItem}/>
                     <p>Remove from list</p>

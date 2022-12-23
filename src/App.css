@@ -22,11 +22,20 @@
 .list-item {
     margin: 10px;
     padding-left: 25px;
+    background-color: rgb(252, 243, 231);
 }
 
-.list-item:hover {
-    background-color: rgb(250, 244, 236);
+.odd-list-item {
+    margin: 10px;
+    padding-left: 25px;
+    background-color: rgb(236, 250, 246);
 }
+
+.list-item:hover, .odd-list-item:hover {
+    background-color: rgb(200, 200, 200);
+}
+
+
 
 .item-description {
     text-decoration: inherit;
