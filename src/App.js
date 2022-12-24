@@ -1,6 +1,10 @@
 import {useState, useEffect, useRef} from 'react';
 import ListItem from './ListItem';
 import './App.css';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
+
 
 function App() {
     // To work on displaying list properly, set up a "dummy" list state, including the name of the user and some list items
@@ -8,7 +12,7 @@ function App() {
         return JSON.parse(localStorage.getItem('todoState')) || {}
         })
 
-    // Every time the "listState" is updated, update local storage keyto match
+    // Every time the "listState" is updated, update local storage information to match
     useEffect(() => {
         localStorage.setItem('todoState', JSON.stringify(listState));
     }, [listState]);
@@ -49,7 +53,7 @@ function App() {
         SetListState(updatedState)
     }
 
-    // Function to remove item from state entirely
+    // Function to remove item from the list entirely
     const removeItem = (id) => {
         const updatedList = listState.listItems.filter((item) => (item.id !== id));
         SetListState({
@@ -59,8 +63,6 @@ function App() {
     }
 
 
-    // 
-
     // Handles New Item submission.
     const handleNewItemSubmit = (e) => {
         e.preventDefault();
@@ -68,8 +70,33 @@ function App() {
     }
 
   return (
-    <>
-        <h1 className='border button shadow rounded'>{`${listState.firstName}'s List`}</h1>
+    <Container>
+        <Row className='mt-3'>
+            <h1 className='rounded-top border mb-0'>{`${listState.firstName}'s List`}</h1>
+        </Row>
+            {listState.listItems.map(((item, index, arr) => {
+                return <Row 
+                    key={item.id} 
+                    className={`
+                        my-0 
+                        ${index%2 === 0 ? 'list-item' : 'odd-list-item'}
+                        ${index === arr.length-1 ? 'rounded-bottom' : null}
+                    `}>
+                        <Col xs='1'>
+                            <input type={'checkbox'} class='larger' checked={!item.completed} onClick={() => toggleComplete(item.id)}/></Col>
+                        <Col>
+                            <ListItem item={item} removeItem={removeItem}/>
+                        </Col>
+                        <Row>
+                            <Col xs={1}>
+                                <p>Remove from list</p>
+                            </Col>
+                            <Col><button className="remove-button" onClick={() => removeItem(item.id)}><div className="margin-auto">X</div></button></Col>
+                        </Row>
+                </Row>
+            }))}
+
+
         <br />
         <form onSubmit={handleNewItemSubmit} className='border rounded button'>
             <label>
@@ -83,24 +110,11 @@ function App() {
             <input type="submit" value="Submit" />
         </form>
         <br />
-        <button onClick={() => {
-            console.log(localStorage.getItem('todoState'));
-        }}>Press button to check "localstorage.todoState"</button>
 
 
-        {listState.listItems.map(((item, index) => {
-            return <div key={item.id} className={index%2===0 ? 'list-item' : 'odd-list-item'}>
-                <button onClick={() => toggleComplete(item.id)}>Toggle complete</button>
-                    <ListItem item={item} removeItem={removeItem}/>
-                    <p>Remove from list</p>
-                    <button className="remove-button" onClick={() => removeItem(item.id)}><div className="margin-auto">X</div></button>
-                <hr />
-            </div>
-        }))}
-
-
-    </>
+    </Container>
   );
 }
+
 
 export default App;
