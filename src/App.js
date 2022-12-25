@@ -88,7 +88,8 @@ function App() {
                     `}>
                         <Row>
                             <Col xs='1' className='my-auto'>
-                                <input style={{'height': '250%'}} type='checkbox' className='larger' checked={item.completed} onChange={() => toggleComplete(item.id)}/></Col>
+                                <Form.Check type='checkbox' checked={item.completed} onChange={() => toggleComplete(item.id)}/>
+                            </Col>
                             <Col>
                                 <ListItem item={item} removeItem={removeItem}/>
                             </Col>
