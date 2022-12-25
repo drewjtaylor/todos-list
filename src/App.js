@@ -75,21 +75,21 @@ function App() {
 
   return (
     <Container>
-        <Row className='mt-3'>
+        <Row className='px-0'>
 
             {/* if there are no items in the list at all, use rounded. else use roudned top */}
-            <h1 className={`${listState.listItems.length === 0 ? 'rounded' : 'rounded-top'} border mb-0 text-center bg-black text-light`}>{`${listState.firstName}'s List`}</h1>
+            <Col>
+                <h1 className={`${listState.listItems.length === 0 ? 'rounded' : 'rounded-top'} border mb-0 text-center bg-black text-light`}>{`${listState.firstName}'s List`}</h1>
+            </Col>
         </Row>
             {listState.listItems.map(((item, index, arr) => {
                 return <Row 
                     key={item.id} 
                     className={`
-                        my-0 
+                        my-0 mx-0
                         ${index%2 === 0 ? 'list-item' : 'odd-list-item'}
                         ${index === arr.length-1 ? 'rounded-bottom' : null}
-                    `}
-                    onClick={() => toggleComplete(item.id)}
-                    >
+                    `}>
                         <Row>
                             <Col xs='1' className='my-auto'>
                                 <Form.Check type='checkbox' checked={item.completed} onChange={() => toggleComplete(item.id)}/>
