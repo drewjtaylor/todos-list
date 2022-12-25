@@ -83,13 +83,13 @@ function App() {
                         ${index === arr.length-1 ? 'rounded-bottom' : null}
                     `}>
                         <Col xs='1'>
-                            <input type={'checkbox'} class='larger' checked={!item.completed} onClick={() => toggleComplete(item.id)}/></Col>
+                            <input type={'checkbox'} class='larger' checked={item.completed} onClick={() => toggleComplete(item.id)}/></Col>
                         <Col>
                             <ListItem item={item} removeItem={removeItem}/>
                         </Col>
                         <Row>
                             <Col xs={1}>
-                                <p>Remove from list</p>
+                                <p>Clear item</p>
                             </Col>
                             <Col><button className="remove-button" onClick={() => removeItem(item.id)}><div className="margin-auto">X</div></button></Col>
                         </Row>
