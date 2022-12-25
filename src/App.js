@@ -87,7 +87,9 @@ function App() {
                         my-0 
                         ${index%2 === 0 ? 'list-item' : 'odd-list-item'}
                         ${index === arr.length-1 ? 'rounded-bottom' : null}
-                    `}>
+                    `}
+                    onClick={() => toggleComplete(item.id)}
+                    >
                         <Row>
                             <Col xs='1' className='my-auto'>
                                 <Form.Check type='checkbox' checked={item.completed} onChange={() => toggleComplete(item.id)}/>
