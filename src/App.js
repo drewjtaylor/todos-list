@@ -4,6 +4,8 @@ import './App.css';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 
 function App() {
@@ -67,12 +69,14 @@ function App() {
     const handleNewItemSubmit = (e) => {
         e.preventDefault();
         addItem(newTitleRef.current.value, newDescriptionRef.current.value)
+        newTitleRef.current.value = '';
+        newDescriptionRef.current.value = ''
     }
 
   return (
     <Container>
         <Row className='mt-3'>
-            <h1 className='rounded-top border mb-0'>{`${listState.firstName}'s List`}</h1>
+            <h1 className='rounded-top border mb-0 text-center bg-black text-light'>{`${listState.firstName}'s List`}</h1>
         </Row>
             {listState.listItems.map(((item, index, arr) => {
                 return <Row 
@@ -82,33 +86,44 @@ function App() {
                         ${index%2 === 0 ? 'list-item' : 'odd-list-item'}
                         ${index === arr.length-1 ? 'rounded-bottom' : null}
                     `}>
-                        <Col xs='1'>
-                            <input type={'checkbox'} class='larger' checked={item.completed} onClick={() => toggleComplete(item.id)}/></Col>
-                        <Col>
-                            <ListItem item={item} removeItem={removeItem}/>
-                        </Col>
                         <Row>
-                            <Col xs={1}>
-                                <p>Clear item</p>
+                            <Col xs='1' className='my-auto'>
+                                <input style={{'height': '250%'}} type='checkbox' className='larger' checked={item.completed} onChange={() => toggleComplete(item.id)}/></Col>
+                            <Col>
+                                <ListItem item={item} removeItem={removeItem}/>
                             </Col>
-                            <Col><button className="remove-button" onClick={() => removeItem(item.id)}><div className="margin-auto">X</div></button></Col>
+                        </Row>
+                        <Row className='mb-2'>
+                            <Col><button className="remove-button" onClick={() => removeItem(item.id)}><div className="margin-auto">Clear Item</div></button></Col>
                         </Row>
                 </Row>
             }))}
 
 
-        <br />
-        <form onSubmit={handleNewItemSubmit} className='border rounded button'>
-            <label>
+        <Form onSubmit={handleNewItemSubmit}>
+            <Form.Group className='my-3'>
+                <Form.Label>New To-Do Title</Form.Label>
+                <Form.Control ref={newTitleRef} type='text' placeholder='Enter title here'/>
+            </Form.Group>
+            <Form.Group className='mb-3'>
+                <Form.Label>New To-Do Details</Form.Label>
+                <Form.Control ref={newDescriptionRef} type='text' placeholder='Enter description here'/>
+            </Form.Group>
+            
+            <Button variant="primary" type="submit">
+                Submit
+            </Button>
+            {/* <label>
                 New item title:
                 <input type="text" name="item" ref={newTitleRef}/>
             </label>
             <label>
                 New item description:
                 <input type="text" name="description" ref={newDescriptionRef}/>
-            </label>
-            <input type="submit" value="Submit" />
-        </form>
+            </label> */}
+
+            {/* <input type="submit" value="Submit" /> */}
+        </Form>
         <br />
 
 
