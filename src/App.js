@@ -76,7 +76,9 @@ function App() {
   return (
     <Container>
         <Row className='mt-3'>
-            <h1 className='rounded-top border mb-0 text-center bg-black text-light'>{`${listState.firstName}'s List`}</h1>
+
+            {/* if there are no items in the list at all, use rounded. else use roudned top */}
+            <h1 className={`${listState.listItems.length === 0 ? 'rounded' : 'rounded-top'} border mb-0 text-center bg-black text-light`}>{`${listState.firstName}'s List`}</h1>
         </Row>
             {listState.listItems.map(((item, index, arr) => {
                 return <Row 
